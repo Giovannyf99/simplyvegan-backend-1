@@ -24,8 +24,8 @@ router.get('/random', async (req, res) => {
             return num
         }
        
-    const fact = await ChecklistRecipes.findByPk(randomNum())
-    res.json(fact)
+    const checklist = await ChecklistRecipes.findByPk(randomNum())
+    res.json(checklist)
     }
     
     catch (error){
