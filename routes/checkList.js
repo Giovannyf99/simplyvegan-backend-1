@@ -1,36 +1,32 @@
 var express = require('express');
 var router = express.Router();
-
-const {ChecklistRecipes} = require("../models");
-
-//GET randomized recipe
+const {ChecklistRecipe ,Condition} = require("../models");
+//GET all Checklist recipe
 router.get('/', async (req, res) => {
     try{
-    const checklistRecipes = await ChecklistRecipes.findAll();
+    const checklistRecipes = await ChecklistRecipe.findAll();
     res.json(checklistRecipes)
     }
     catch (error) {
-        res.status(500).json({ message: "Error retrieving random fact", error });
+        res.status(500).json({ message: "Error retrieving recipes for condition", error });
     }
 });
-
-router.get('/random', async (req, res) => {
-    try{
-        const count = await ChecklistRecipes.count()
-
-        //function to generate a random number between 1 and the number of rows of the Recipe table
-         let randomNum = () =>{
-            let num = 1+Math.floor(Math.random()*(count))
-            return num
-        }
+// GET recipes based on particular condition
+router.get('/:conditionID', async (req, res) => {
+    try {
+        console.log('trying to show all with an condition')
+        console.log(req.params.conditionID)
+        console.log(typeof(req.params.conditionID))
+        const checklistRecipes = await ChecklistRecipe.findAll({
+            where: {
+                conditionID: req.params.conditionID
+            }
+        })
        
-    const checklist = await ChecklistRecipes.findByPk(randomNum())
-    res.json(checklist)
+        res.json(checklistRecipes)
     }
-    
-    catch (error){
-        res.status(500).json({ message: "Error retrieving random fact", error });
+    catch (error) {
+        res.status(500).json({ message: "Error retrieving recipes for condition", error });
     }
 })
-
 module.exports = router;
