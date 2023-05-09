@@ -8,7 +8,7 @@ var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 var recipesRouter = require('./routes/recipes');
 var factsRouter = require('./routes/facts');
-var checklistRouter = require('./routes/checklist');
+var checklistRouter = require('./routes/checkList');
 
 
 var app = express();
