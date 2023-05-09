@@ -8,6 +8,8 @@ var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 var recipesRouter = require('./routes/recipes');
 var factsRouter = require('./routes/facts');
+var checkListRouter = require('./routes/checkList');
+
 
 var app = express();
 
@@ -22,5 +24,7 @@ app.use('/', indexRouter);
 app.use('/users', usersRouter);
 app.use('/recipes', recipesRouter);
 app.use('/facts', factsRouter);
+app.use('/checkList', checkListRouter);
+
 
 module.exports = app;
